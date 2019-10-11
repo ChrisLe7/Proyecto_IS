@@ -1,7 +1,9 @@
 # Concertar, cambiar o cancelar cita.
 **ID:** 02 
+
 **Descripción :** 
 Como [Doctor|Secretario] quiero acceder a la agenda de citas para poder concertar citas, cambiarlas o cancelarlas.
+
 **Validación:**
 * Se debe poder visualizar un listado completo de las posibles citas disponibles.
 * Es necesario que el día esté disponible.
