@@ -1,7 +1,9 @@
 # Ver, añadir y finalizar el tratamiento de un paciente.
 **ID:** 05 
+
 **Descripción :** 
 Como [Doctor|Secretario] quiero acceder al tratamiento de un paciente para poder ver el tratamiento, añadir un nuevo tratamiento o finalizarlo. 
+
 **Validación:** 
 * Se debe poder visualizar cualquier tratamiento.
 * Los resultados de la búsqueda pueden mostrar cero o más resultados.
