@@ -1,5 +1,5 @@
 # Añadir tratamiento del paciente
-**ID:** 11
+**ID:** 13
 
 **Descripción:** El [Doctor|Secretario] desea introducir un nuevo tratamiento a un paciente. 
 
