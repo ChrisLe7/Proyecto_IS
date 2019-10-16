@@ -1,5 +1,5 @@
 # Finalizar tratamiento del paciente
-**ID:** 12
+**ID:** 14
 
 **Descripción :** El [Doctor|Secretario] desea finalizar un tratamiento vigente de un paciente. 
 
