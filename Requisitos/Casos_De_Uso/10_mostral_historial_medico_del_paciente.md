@@ -1,5 +1,5 @@
 # Mostrar historial médico del paciente
-**ID:** 08
+**ID:** 10
 
 **Descripción:** Se desea visualizar el historial de las citas médicas y de los tratamientos a un paciente en el último año.
 
