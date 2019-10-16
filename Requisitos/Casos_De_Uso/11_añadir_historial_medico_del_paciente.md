@@ -1,5 +1,5 @@
 # Añadir historial médico del paciente
-**ID:** 09
+**ID:** 11
 
 **Descripción:** El [Doctor|Secretario] desea introducir un nuevo historial médico.
 
