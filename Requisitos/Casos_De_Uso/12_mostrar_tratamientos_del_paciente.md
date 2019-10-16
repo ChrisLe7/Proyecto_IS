@@ -1,5 +1,5 @@
 # Mostrar tratamientos del paciente
-**ID:** 10
+**ID:** 12
 
 **Descripción:** Se desea visualizar los tratamientos vigentes en un paciente.
 
