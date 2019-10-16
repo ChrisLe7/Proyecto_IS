@@ -1,5 +1,5 @@
 # Ver y actualizar el historial médico de un paciente.
-**ID:** 04 
+**ID:** 07
 
 **Descripción :** 
 Como [Doctor|Secretario] quiero localizar el historial médico de un paciente para consultar su información y actualizarlo al día.
