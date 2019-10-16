@@ -38,18 +38,17 @@
 2. Mostrar paciente.
 3. Añadir paciente.
 4. Modificar datos del paciente.
-5. Borrar datos del  paciente.
-6. Borrar paciente.
-7. Mostrar historial médico del paciente.
-8. Añadir nuevo historial médico del paciente.
-9. Mostrar tratamientos (Fecha de prescripción , Dosis de consumo, fecha de finalización , frecuencia de dosis).
-10. Añadir tratamiento.
-11. Finalización de tratamiento.
-12. Añadir cita. 
-13. Cambiar cita. 
-14. Cancelar cita .
-15. Mostrar agenda de citas diaria.
-16. Mostrar agenda de citas completa. 
+5. Borrar paciente.
+6. Mostrar historial médico del paciente.
+7. Añadir nuevo historial médico del paciente.
+8. Mostrar tratamientos (Fecha de prescripción , Dosis de consumo, fecha de finalización , frecuencia de dosis).
+9. Añadir tratamiento.
+10. Finalización de tratamiento.
+11. Añadir cita. 
+12. Cambiar cita. 
+13. Cancelar cita .
+14. Mostrar agenda de citas diaria.
+15. Mostrar agenda de citas completa. 
 
 ## Requisitos no funcionales:
 * Lenguaje de implementación : C++.
