@@ -1,5 +1,5 @@
 # Cancelar cita
-**ID:** 05
+**ID:** 07
 
 **Descripción:** Se cancela la cita del paciente.
 
