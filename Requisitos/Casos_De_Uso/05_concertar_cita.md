@@ -19,3 +19,4 @@
 2. a. Si el paciente ya tiene cita registrada el sistema mostrará dos opciones:  
   * No concertar cita.
   * Cambiar cita.
+2. b. Si la fecha/hora seleccionada está registrada ya, se mostrará un mensaje de error y se solicitará una nueva fecha/hora.  
