@@ -35,7 +35,7 @@ void Sistema::menu(){
 		getchar();
 		switch(opc){
 			case 1:
-
+				setPaciente();
 			break;
 			case 2:
 
@@ -54,6 +54,38 @@ void Sistema::menu(){
 
 }
 
+void setPaciente(){
+
+	string nombre, apellido;
+	int edad;
+	double telefono;
+	float peso, altura;
+	char SN;	//Opcion que indica si quiere o no introducir el resto de datos
+	cout<<"Introduce el nombre del paciente: ";
+	getline(cin, nombre);
+	cout<<"Introduce los apellidos del paciente: ";
+	getline(cin, apellido);
+	cout<<"¿Desea introducir la edad, el telefono, el peso y la altura del paciente? (S/N): ";
+	if('S' == getchar(SN) || 's' == getchar(SN)){
+		cout<<"Introduce la edad del paciente: ";
+		cin>>edad;
+		getchar();
+		cout<<"Introduce el telefono del paciente: ";
+		cin>>telefono;
+		getchar();
+		cout<<"Introduce el peso del paciente: ";
+		cin>>peso;
+		getchar();
+		cout<<"Introduce la altura del paciente: ";
+		cin>>altura;
+		getchar();
+		Paciente p(nombre, apellido, edad, telefono, peso, altura);
+	}
+	Paciente p(nombre, apellido);
+	agregarPaciente(p);
+
+}
+
 void agregarPaciente(const Paciente &p){
 
 	pacientes_.push_back(p);
@@ -63,6 +95,6 @@ void agregarPaciente(const Paciente &p){
 
 void Sistema::modificarPaciente(Paciente &p){
 
-	cout<<""
+	cout<<"";
 
 }
