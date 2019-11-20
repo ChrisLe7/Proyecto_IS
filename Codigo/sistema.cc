@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include "paciente.h"
+#include "sistema.h"
 
 using std::cin;
 using std::cout;
