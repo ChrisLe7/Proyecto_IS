@@ -19,7 +19,7 @@ class Sistema{
 		void start();
 		void menu();
 		void agregarPaciente(const Paciente &p);
-		bool buscarPAcientes(string nombre);
+		bool buscarPacientes(string nombre);
 		void modificarPaciente(Paciente &p);
 		bool eliminarPaciente(string nombre);
 

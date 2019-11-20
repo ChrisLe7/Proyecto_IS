@@ -62,7 +62,36 @@ void agregarPaciente(const Paciente &p){
 }
 
 void Sistema::modificarPaciente(Paciente &p){
-
-	cout<<""
-
+/* EN DESARROLLO : WIP */
 }
+
+bool Sistema::buscarPacientes(string nombre) {
+		
+		list<Paciente> aux = getPacientes();
+		list <Paciente> :: iterator i;
+		for(i= aux.begin();i !=aux.end();i++) {
+			if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
+				return true;
+			}
+		}
+		return false;
+}
+
+bool Sistema::eliminarPaciente (string nombre) {
+	
+	list<Paciente> aux = getPacientes();
+	list <Paciente> :: iterator i;
+	for(i= aux.begin();i !=aux.end();i++) {
+			if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
+				Eliminar_Paciente_fich(i);
+				aux.erase(i);
+			
+					return true;
+			}
+	}
+	return false;
+}
+
+/* EN DESARROLLO : WIP 
+bool Sistema::Eliminar_Paciente_fich(string nombre) {
+}*/
