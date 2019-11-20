@@ -9,14 +9,14 @@ using std::string;
 
 class Paciente{
 
- 	private:
+	private:
 
 		string nombre_;
 		string apellidos_;
-	    int edad_;
-	    double telefono_;
-	    float peso_;
-	    float altura_;
+		int edad_;
+		double telefono_;
+		float peso_;
+		float altura_;
 
 	public:
 
@@ -52,12 +52,12 @@ class Paciente{
 		inline double getTelefono() const {
 			return telefono_;
 		}
-	    inline float getPeso() const {
+		inline float getPeso() const {
 			return peso_;
-	    }
+		}
 		inline float getAltura() const {
 			return altura_;
-	    }
+		}
 
 };
 
