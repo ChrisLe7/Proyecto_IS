@@ -17,6 +17,13 @@ void Sistema::opciones(){
 
 }
 
+void Sistema::agregarPaciente(const Paciente &p){
+
+	pacientes_.push_back(p);
+	//fichero
+
+}
+
 void Sistema::start(){
 
 	cout<<"--------Inicializando sistema--------"<<endl;
@@ -54,7 +61,7 @@ void Sistema::menu(){
 
 }
 
-void setPaciente(){
+void Sistema::setPaciente(){
 
 	string nombre, apellido;
 	int edad;
@@ -86,15 +93,38 @@ void setPaciente(){
 
 }
 
-void agregarPaciente(const Paciente &p){
-
-	pacientes_.push_back(p);
-	//fichero
-
-}
-
 void Sistema::modificarPaciente(Paciente &p){
+/* EN DESARROLLO : WIP */
+}
 
-	cout<<"";
+bool Sistema::buscarPacientes(string nombre) {
+		
+	list <Paciente> aux = getPacientes();
+	list <Paciente> :: iterator i;
+	for(i= aux.begin();i !=aux.end();i++) {
+		if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
+			return true;
+		}
+	}
+	return false;
 
 }
+
+bool Sistema::eliminarPaciente (string nombre) {
+	
+	list <Paciente> aux = getPacientes();
+	list <Paciente> :: iterator i;
+	for(i= aux.begin();i !=aux.end();i++) {
+			if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
+				Eliminar_Paciente_fich(i);
+				aux.erase(i);
+					return true;
+			}
+	}
+	return false;
+
+}
+
+/* EN DESARROLLO : WIP 
+bool Sistema::Eliminar_Paciente_fich(string nombre) {
+}*/
