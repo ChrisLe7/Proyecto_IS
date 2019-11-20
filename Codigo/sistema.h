@@ -5,8 +5,8 @@
 #include <list>
 #include "paciente.h"
 
-using std::list
-using std::string
+using std::list;
+using std::string;
 
 class Sistema{
 
@@ -18,15 +18,16 @@ class Sistema{
 
 	public:
 
-		Sistema();
-		~Sistema();
+		//Sistema();
+		//~Sistema();
 		void start();
 		void menu();
 		void setPaciente();
-		inline void getPacientes() const {
+		inline list <Paciente> getPacientes() const {
 			return pacientes_;
 		}
 		bool buscarPacientes(string nombre);
+		void mostrarPacientes();
 		void modificarPaciente(Paciente &p);
 		bool eliminarPaciente(string nombre);
 

@@ -6,15 +6,17 @@
 
 using std::cin;
 using std::cout;
+using std::endl;
 using std::list;
 using std::string;
 
 void Sistema::opciones(){
 
 	cout<<"1) Crear paciente."<<endl;
-	cout<<"2) Buscar paciente paciente."<<endl;
-	cout<<"3) Modificar paciente."<<endl;
-	cout<<"4) Eliminar paciente."<<endl;
+	cout<<"2) Buscar paciente."<<endl;
+	cout<<"3) Mostrar pacientes."<<endl;
+	cout<<"4) Modificar paciente."<<endl;
+	cout<<"5) Eliminar paciente."<<endl;
 
 }
 
@@ -35,6 +37,7 @@ void Sistema::start(){
 void Sistema::menu(){
 
 	int opc;
+	string nombre;
 	do{
 
 		opciones();
@@ -46,13 +49,22 @@ void Sistema::menu(){
 				setPaciente();
 			break;
 			case 2:
-
+				cout<<"Introduce el nombre completo del paciente a buscar: ";
+				getline(cin, nombre);
+				if(buscarPacientes(nombre)){
+					cout<<"Se encontro al paciente."<<endl;
+				}
 			break;
 			case 3:
-
+				mostrarPacientes();
 			break;
 			case 4:
 
+			break;
+			case 5:
+				cout<<"Introduce el nombre completo del paciente a eliminar: ";
+				getline(cin, nombre);
+				eliminarPaciente(nombre);
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
@@ -74,7 +86,8 @@ void Sistema::setPaciente(){
 	cout<<"Introduce los apellidos del paciente: ";
 	getline(cin, apellido);
 	cout<<"¿Desea introducir la edad, el telefono, el peso y la altura del paciente? (S/N): ";
-	if('S' == getchar(SN) || 's' == getchar(SN)){
+	SN = getchar();
+	if('s' == SN || 'S' == SN){
 		cout<<"Introduce la edad del paciente: ";
 		cin>>edad;
 		getchar();
@@ -94,16 +107,12 @@ void Sistema::setPaciente(){
 
 }
 
-void Sistema::modificarPaciente(Paciente &p){
-/* EN DESARROLLO : WIP */
-}
-
 bool Sistema::buscarPacientes(string nombre) {
 		
-	list <Paciente> aux = getPacientes();
+	//list <Paciente> aux = getPacientes();		Es inutil pues puede acceder directamente ya que es de su propia clase
 	list <Paciente> :: iterator i;
-	for(i= aux.begin();i !=aux.end();i++) {
-		if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
+	for(i = pacientes_.begin(); i != pacientes_.end(); i++) {
+		if((*i).getApellidos() + " " + (*i).getNombre() == nombre ) {
 			return true;
 		}
 	}
@@ -111,16 +120,31 @@ bool Sistema::buscarPacientes(string nombre) {
 
 }
 
+void Sistema::mostrarPacientes(){
+
+	list <Paciente> :: iterator i;
+	for(i = pacientes_.begin(); i != pacientes_.end(); i++){
+		cout<<"Nombre: "<<(*i).getNombre()<<endl;
+		cout<<"Apellidos: "<<(*i).getApellidos()<<endl;
+	}
+
+}
+
+void Sistema::modificarPaciente(Paciente &p){
+/* EN DESARROLLO : WIP */
+}
+
+
 bool Sistema::eliminarPaciente (string nombre) {
 	
-	list <Paciente> aux = getPacientes();
+	//list <Paciente> aux = getPacientes();		Igual que el anterior
 	list <Paciente> :: iterator i;
-	for(i= aux.begin();i !=aux.end();i++) {
-			if ((*i).getApellidos() + (*i).getNombre() = nombre ) {
-				Eliminar_Paciente_fich(i);
-				aux.erase(i);
-					return true;
-			}
+	for(i = pacientes_.begin(); i != pacientes_.end(); i++) {
+		if((*i).getApellidos() + " " + (*i).getNombre() == nombre ) {
+			//Eliminar_Paciente_fich(i);
+			pacientes_.erase(i);
+			return true;
+		}
 	}
 	return false;
 
