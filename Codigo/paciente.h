@@ -4,8 +4,8 @@
 #include <string>
 #include <list>
 
-using namespace std;
-
+using std::list;
+using std::string;
 
 class Paciente{
 
