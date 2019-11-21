@@ -126,12 +126,64 @@ void Sistema::mostrarPacientes(){
 	for(i = pacientes_.begin(); i != pacientes_.end(); i++){
 		cout<<"Nombre: "<<(*i).getNombre()<<endl;
 		cout<<"Apellidos: "<<(*i).getApellidos()<<endl;
+		cout<<"Edad: "<<(*i).getEdad()<<endl;
+		cout<<"Telefono: "<<(*i).getTelefono()<<endl;
+		cout<<"Peso: "<<(*i).getPeso()<<endl;
+		cout<<"Altura: "<<(*i).getAltura()<<endl;
 	}
 
 }
 
 void Sistema::modificarPaciente(Paciente &p){
 /* EN DESARROLLO : WIP */
+	int opc;
+	int n;
+	string line;
+	double m;
+	float q;
+	do{
+		cout<<"¿Que desea modificar?"<<endl;
+		cout<<"1. Nombre"<<endl;
+		cout<<"2. Apellidos"<<endl;
+		cout<<"3. Edad"<<endl;
+		cout<<"4. Telefono"<<endl;
+		cout<<"5. Peso"<<endl;
+		cout<<"6. Altura"<<endl;
+		cout<<"7. Guardar cambios"<<endl;
+		switch(opc){
+			case 1:
+				getline(cin, line);
+				p.setNombre(line);
+			break;
+			case 2:
+				getline(cin, line);
+				p.setApellidos(line);
+			break;
+			case 3:
+				cin>>n;
+				p.setEdad(n);
+			break;
+			case 4:
+				cin>>m;
+				p.setTelefono(m);
+			break;
+			case 5:
+				cin>>q;
+				p.setPeso(q);
+			break;
+			case 6:
+				cin>>q;
+				p.setAltura(q);
+			break;
+			case 7:
+				cout<<"Cambios guardados"<<endl;
+			break;
+			default:
+				cout<<"Opcion no valida"
+		}
+	}while(opc != 7);
+	
+
 }
 
 
