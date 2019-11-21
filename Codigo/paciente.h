@@ -1,9 +1,12 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 
+#include <iostream>
 #include <string>
 #include <list>
 
+//using namespace std;
+using std::ostream;
 using std::list;
 using std::string;
 
@@ -22,6 +25,7 @@ class Paciente{
 
 		Paciente(string, string, int = 0, double = 0, float = 0, float = 0);
 		~Paciente();
+		friend ostream &operator<<(ostream &stream, const Paciente &p);
 		inline void setNombre(string nombre){
 			nombre_ = nombre;
 		}
