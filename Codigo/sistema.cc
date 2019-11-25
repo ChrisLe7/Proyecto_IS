@@ -1,9 +1,14 @@
 #include <iostream>
+#include <fstream>
+#include <string.h>
 #include <string>
 #include <list>
 #include "paciente.h"
 #include "sistema.h"
 
+using std::ofstream;
+using std::ifstream;
+using std::ios;
 using std::cin;
 using std::cout;
 using std::endl;
@@ -20,12 +25,43 @@ void Sistema::opciones(){
 
 }
 
+
+void Sistema::LeerPacientes(){
+
+	Paciente aux("","");
+
+	ifstream lectura("pacientes.bin", ios::binary);
+	lectura.read((char*)&aux,sizeof(Paciente));
+	cout <<aux;
+/*	while(!lectura.eof()){
+		cout << aux <<endl;
+		lectura.read((char*)(&aux),sizeof(Paciente));
+		
+		
+	}
+*/	
+
+	lectura.close();
+}
+
 void Sistema::agregarPaciente(const Paciente &p){
 
+Paciente aux("","");
 	pacientes_.push_back(p);
 	//fichero
 
+	ofstream fichero("pacientes.bin", ios::binary | ios::app); //lol
+
+	fichero.write((char*)&p,sizeof(Paciente));
+	fichero.close();
+
+	ifstream lectura("pacientes.bin", ios::binary);
+	lectura.read((char*)&aux,sizeof(Paciente));
+	cout <<aux;
+	lectura.close();
+
 }
+
 
 void Sistema::modificaDatos(Paciente &p){
 
@@ -141,6 +177,9 @@ void Sistema::menu(){
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
 				buscaPaciente(aux, 3);
+			break;
+			case 6:
+				LeerPacientes();
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
