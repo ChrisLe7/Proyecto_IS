@@ -10,6 +10,10 @@ using std::ostream;
 using std::list;
 using std::string;
 
+
+
+
+
 class Paciente{
 
 	private:

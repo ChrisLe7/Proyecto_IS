@@ -30,7 +30,7 @@ class Sistema{
 		bool buscaPaciente(const Paciente &p, int opc);		//Recibe como primer parametro el paciente con el que trabajara y como segundo el que hara con el paciente
 		//bool buscarPacientes(const Paciente &p);
 		void mostrarPacientes();
-		void LeerPacientes();
+		void LeerPacientes(const Paciente p);
 		//void modificarPaciente(Paciente &p);
 		//bool eliminarPaciente(const Paciente &p);
 

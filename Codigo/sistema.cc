@@ -6,6 +6,10 @@
 #include "paciente.h"
 #include "sistema.h"
 
+
+using namespace std;
+
+/*using std::fstream;
 using std::ofstream;
 using std::ifstream;
 using std::ios;
@@ -14,7 +18,7 @@ using std::cout;
 using std::endl;
 using std::list;
 using std::string;
-
+*/
 void Sistema::opciones(){
 
 	cout<<"1) Crear paciente."<<endl;
@@ -26,39 +30,18 @@ void Sistema::opciones(){
 }
 
 
-void Sistema::LeerPacientes(){
+void Sistema::LeerPacientes(const Paciente p){
 
-	Paciente aux("","");
-
-	ifstream lectura("pacientes.bin", ios::binary);
-	lectura.read((char*)&aux,sizeof(Paciente));
-	cout <<aux;
-/*	while(!lectura.eof()){
-		cout << aux <<endl;
-		lectura.read((char*)(&aux),sizeof(Paciente));
-		
-		
-	}
-*/	
-
-	lectura.close();
 }
 
 void Sistema::agregarPaciente(const Paciente &p){
 
-Paciente aux("","");
 	pacientes_.push_back(p);
 	//fichero
-
-	ofstream fichero("pacientes.bin", ios::binary | ios::app); //lol
-
-	fichero.write((char*)&p,sizeof(Paciente));
+	ofstream fichero("pacientes.txt", ios::app); //lol
+	fichero << p;
+	fichero << "\n";
 	fichero.close();
-
-	ifstream lectura("pacientes.bin", ios::binary);
-	lectura.read((char*)&aux,sizeof(Paciente));
-	cout <<aux;
-	lectura.close();
 
 }
 
@@ -177,9 +160,6 @@ void Sistema::menu(){
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
 				buscaPaciente(aux, 3);
-			break;
-			case 6:
-				LeerPacientes();
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
