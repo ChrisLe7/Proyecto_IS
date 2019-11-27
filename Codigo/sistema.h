@@ -24,13 +24,11 @@ class Sistema{
 		void start();
 		void menu();
 		void setPaciente();
-		inline list <Paciente> getPacientes() const {
-			return pacientes_;
-		}
+		inline list <Paciente> getPacientes() const {return pacientes_;}
 		bool buscaPaciente(const Paciente &p, int opc);		//Recibe como primer parametro el paciente con el que trabajara y como segundo el que hara con el paciente
 		//bool buscarPacientes(const Paciente &p);
 		void mostrarPacientes();
-		void LeerPacientes(const Paciente p);
+		void leerPacientes(/*const Paciente p*/);
 		//void modificarPaciente(Paciente &p);
 		//bool eliminarPaciente(const Paciente &p);
 

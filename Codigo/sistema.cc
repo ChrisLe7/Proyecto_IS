@@ -26,11 +26,44 @@ void Sistema::opciones(){
 	cout<<"3) Mostrar pacientes."<<endl;
 	cout<<"4) Modificar paciente."<<endl;
 	cout<<"5) Eliminar paciente."<<endl;
+	cout<<"6) Leer pacientes."<<endl;
 
 }
 
+void Sistema::leerPacientes(/*const Paciente p*/){
 
-void Sistema::LeerPacientes(const Paciente p){
+	cout<<"HE ENTRADO"<<endl;
+	//Paciente aux("", "");
+	string nombre, apellidos;
+	int edad;
+	float peso, altura;
+	double telefono;
+	char line[100];
+	ifstream fichero("paciente.txt");
+	fichero.seekg(0L, ios::beg);
+	while(fichero.getline(line, 265, ',')){
+		cout<<"HE ENTRADO 2"<<endl;
+		nombre = line;
+		//aux.setNombre(line);
+		fichero.getline(line, 265, ',');
+		nombre = line;
+		//aux.setApellidos(line);
+		fichero.getline(line, 265, ',');
+		nombre = atoi(line);
+		//aux.setEdad(atoi(line));
+		fichero.getline(line, 265, ',');
+		nombre = atof(line);
+		//aux.setTelefono(atof(line));
+		fichero.getline(line, 265, ',');
+		nombre = atof(line);
+		//aux.setPeso(atof(line));
+		fichero.getline(line, 265);
+		nombre = atof(line);
+		//aux.setAltura(atof(line));
+		Paciente aux(nombre, apellidos, edad, telefono, peso, altura);
+		cout << aux;
+	}
+	fichero.close();
 
 }
 
@@ -38,9 +71,14 @@ void Sistema::agregarPaciente(const Paciente &p){
 
 	pacientes_.push_back(p);
 	//fichero
-	ofstream fichero("pacientes.txt", ios::app); //lol
-	fichero << p;
-	fichero << "\n";
+	ofstream fichero("pacientes.txt", ios::app);
+	fichero << p.getNombre() << ",";
+	fichero << p.getApellidos() << ",";
+	fichero << p.getEdad() << ",";
+	fichero << p.getTelefono() << ",";
+	fichero << p.getPeso() << ",";
+	fichero << p.getAltura() << "\n";
+	//fichero << "\n";
 	fichero.close();
 
 }
@@ -161,6 +199,9 @@ void Sistema::menu(){
 				aux.setApellidos(apellidos);
 				buscaPaciente(aux, 3);
 			break;
+			case 6:
+				leerPacientes();
+			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
 		}
@@ -171,7 +212,7 @@ void Sistema::menu(){
 
 void Sistema::setPaciente(){
 
-	string nombre, apellido;
+	/*string nombre, apellido;
 	int edad;
 	double telefono;
 	float peso, altura;
@@ -210,7 +251,10 @@ void Sistema::setPaciente(){
 			cout<<"Opcion no valida"<<endl;
 			getchar();
 		}
-	}while(valida != true);
+	}while(valida != true);*/
+	Paciente aux("", "");
+	cin>>aux;
+	agregarPaciente(aux);
 
 }
 
@@ -289,8 +333,8 @@ void Sistema::mostrarPacientes(){
 /* EN DESARROLLO : WIP 
 bool Sistema::Eliminar_Paciente_fich(string nombre) {
 }*/
-
+/*
 void Sistema::Mostrar_historial_medico(string nombre) {
 	Historial aux (nombre +".txt");
 	aux.Mostrar(nombre +".txt");
-}
+}*/

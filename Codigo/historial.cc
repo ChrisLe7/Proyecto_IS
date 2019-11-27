@@ -1,8 +1,8 @@
 //NO ESTA COMPILADO
 
-#include "historial.h"
 #include <fstream>
 #include <iostream>
+#include "historial.h"
 
 
 Historial::Historial() {

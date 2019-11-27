@@ -1,22 +1,28 @@
 //NO ESTA COMPILADO
-
-#include <fstream> 
-#include <iostream>
-
 #ifndef HISTORIAL_H
 #define HISTORIAL_H 
 
-class Historial
-{
-private:
-	 string fecha_;
-	 string motivo_;
-public:
-	Historial(string fichero);
-	~Historial();
-	void Historial::Mostrar (string fichero) ;
-	void Historial::Aniadir (string fichero) ;
-	inline string getFecha () {return fecha_;}
-	inline string getMotivo () {return motivo_;}
+#include <fstream>
+#include <string>
+
+using std::string;
+
+class Historial{
+
+	private:
+
+		string fecha_;
+		string motivo_;
+
+	public:
+
+		Historial(string fichero);
+		~Historial();
+		void Historial::Mostrar (string fichero) ;
+		void Historial::Aniadir (string fichero) ;
+		inline string getFecha() const {return fecha_;}
+		inline string getMotivo() const {return motivo_;}
+
 };
+
 #endif
