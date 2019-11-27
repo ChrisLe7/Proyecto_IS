@@ -289,3 +289,8 @@ void Sistema::mostrarPacientes(){
 /* EN DESARROLLO : WIP 
 bool Sistema::Eliminar_Paciente_fich(string nombre) {
 }*/
+
+void Sistema::Mostrar_historial_medico(string nombre) {
+	Historial aux (nombre +".txt");
+	aux.Mostrar(nombre +".txt");
+}
