@@ -1,11 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <cstdlib>
 #include <string>
 #include <list>
 #include "paciente.h"
 #include "sistema.h"
-
 
 using namespace std;
 
@@ -27,40 +26,43 @@ void Sistema::opciones(){
 	cout<<"4) Modificar paciente."<<endl;
 	cout<<"5) Eliminar paciente."<<endl;
 	cout<<"6) Leer pacientes."<<endl;
+	cout<<"7) Salir del programa."<<endl;
 
 }
 
 void Sistema::leerPacientes(/*const Paciente p*/){
 
-	cout<<"HE ENTRADO"<<endl;
-	//Paciente aux("", "");
-	string nombre, apellidos;
+	Paciente aux("", "");
+	/*string nombre, apellidos;
 	int edad;
 	float peso, altura;
 	double telefono;
 	char line[100];
-	ifstream fichero("paciente.txt");
-	fichero.seekg(0L, ios::beg);
+	ifstream fichero("pacientes.txt");
 	while(fichero.getline(line, 265, ',')){
-		cout<<"HE ENTRADO 2"<<endl;
-		nombre = line;
-		//aux.setNombre(line);
+		//nombre = line;
+		aux.setNombre(line);
 		fichero.getline(line, 265, ',');
-		nombre = line;
-		//aux.setApellidos(line);
+		//apellidos = line;
+		aux.setApellidos(line);
 		fichero.getline(line, 265, ',');
-		nombre = atoi(line);
-		//aux.setEdad(atoi(line));
+		//edad = atoi(line);
+		aux.setEdad(atoi(line));
 		fichero.getline(line, 265, ',');
-		nombre = atof(line);
-		//aux.setTelefono(atof(line));
+		//telefono = atof(line);
+		aux.setTelefono(atof(line));
 		fichero.getline(line, 265, ',');
-		nombre = atof(line);
-		//aux.setPeso(atof(line));
+		//peso = atof(line);
+		aux.setPeso(atof(line));
 		fichero.getline(line, 265);
-		nombre = atof(line);
-		//aux.setAltura(atof(line));
-		Paciente aux(nombre, apellidos, edad, telefono, peso, altura);
+		//altura = atof(line);
+		aux.setAltura(atof(line));
+		//Paciente aux(nombre, apellidos, edad, telefono, peso, altura);
+		cout << aux;
+	}*/
+	ifstream fichero("pacientes.bin", ios::binary);
+	//fichero.seekg(0L, ios::beg);
+	while(fichero.read((char*)&aux, sizeof(Paciente))){
 		cout << aux;
 	}
 	fichero.close();
@@ -70,15 +72,15 @@ void Sistema::leerPacientes(/*const Paciente p*/){
 void Sistema::agregarPaciente(const Paciente &p){
 
 	pacientes_.push_back(p);
-	//fichero
-	ofstream fichero("pacientes.txt", ios::app);
+	/*ofstream fichero("pacientes.txt", ios::app);
 	fichero << p.getNombre() << ",";
 	fichero << p.getApellidos() << ",";
 	fichero << p.getEdad() << ",";
 	fichero << p.getTelefono() << ",";
 	fichero << p.getPeso() << ",";
-	fichero << p.getAltura() << "\n";
-	//fichero << "\n";
+	fichero << p.getAltura() << "\n";*/
+	ofstream fichero("pacientes.bin", ios::app | ios::binary);
+	fichero.write((char*)&p, sizeof(Paciente));
 	fichero.close();
 
 }
@@ -201,6 +203,9 @@ void Sistema::menu(){
 			break;
 			case 6:
 				leerPacientes();
+			break;
+			case 7:
+				cout<<"Saliendo del programa."<<endl;
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
