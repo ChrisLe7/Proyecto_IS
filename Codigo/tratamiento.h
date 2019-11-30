@@ -4,8 +4,9 @@
 #define TRATAMIENTO_H
 
 #include <string>
+#include <iostream>
 
-using std::string;
+using namespace std;
 
 class Tratamiento{
 

@@ -83,4 +83,6 @@ istream &operator>>(istream &stream, Paciente &p){
 		}
 	}while(valida != true);
 
+	return stream;
+
 }
