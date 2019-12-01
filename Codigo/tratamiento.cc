@@ -1,4 +1,4 @@
-//NO ESTA COMPILADO
+
 
 #include <iostream>
 #include <fstream>
@@ -13,9 +13,9 @@ void Mostrar(string fichero){
 
 	Tratamiento aux;
 	fstream fichero_;
-	fichero_.open(fichero, ios:: in | ios ::binary) ;
-	if (fichero.is_open ()){
-		while (! fichero.eof()){
+	fichero_.open(fichero, ios:: in ) ;
+	if (fichero_.is_open ()){
+		while (! fichero_.eof()){
 			fichero_.read((char*)&aux, sizeof(Tratamiento));
 			cout<< aux.getFechainicio()<<endl;
 			cout << aux.getFechafinacilizacion()<<endl;
