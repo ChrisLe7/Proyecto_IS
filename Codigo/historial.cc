@@ -1,17 +1,17 @@
 //NO ESTA COMPILADO
-
+// NO SE HAN HECHO LAS PRUEBAS
 #include <fstream>
 #include <iostream>
 #include "historial.h"
 
 
 Historial::Historial() {
-	fstream fichero_;
+	/*fstream fichero_;
 	fichero_.open(fichero, ios:: in | ios ::binary) ;
 	if (fichero.is_open ()) {
 		//fichero_.read(())
 	} 
-
+	*/
 }
 
 void Historial::Mostrar (string fichero) {
@@ -41,3 +41,14 @@ void Historial::Aniadir (string fichero) {
 
 
 }
+
+		RegH Historial::getRegH () {
+			RegT r ;
+			strcpy(r.fecha, fecha_.c_str());
+			strcpy(r.motivo, motivo_.c_str());
+	
+		}
+		void Historial::setRegH (RegH r) {
+			fecha_ = fecha;
+			motivo_ = motivo;
+		}
