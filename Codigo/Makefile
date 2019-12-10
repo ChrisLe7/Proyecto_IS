@@ -1,4 +1,40 @@
-all: main.exe
+GTEST_DIR = /home/christian-2019/POO/googletest/
+# Where to find user code.
+# USER_DIR = ../samples
+
+# Flags passed to the preprocessor.
+# Set Google Test's header directory as a system directory, such that
+# the compiler doesn't generate warnings in Google Test headers.
+CPPFLAGS += -isystem $(GTEST_DIR)/include
+
+# Flags passed to the C++ compiler.
+CXXFLAGS += -g -Wall -Wextra -pthread -std=gnu++11
+
+# All tests produced by this Makefile.  Remember to add new tests you
+# created to the list.
+TESTS = paciente_unittest
+
+# All Google Test headers.  Usually you shouldn't change this
+# definition.
+GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
+                $(GTEST_DIR)/include/gtest/internal/*.h
+GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
+
+all: main.exe cita_unittest.exe
+
+gtest-all.o : $(GTEST_SRCS_)
+	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
+            $(GTEST_DIR)/src/gtest-all.cc
+
+gtest_main.o : $(GTEST_SRCS_)
+	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
+            $(GTEST_DIR)/src/gtest_main.cc
+
+gtest.a : gtest-all.o
+	$(AR) $(ARFLAGS) $@ $^
+
+gtest_main.a : gtest-all.o gtest_main.o
+	$(AR) $(ARFLAGS) $@ $^
 
 main.exe: main.o sistema.o paciente.o
 	g++ -o main.exe main.o sistema.o paciente.o
@@ -6,16 +42,28 @@ main.exe: main.o sistema.o paciente.o
 main.o: main.cc
 	g++ -c main.cc
 
-sistema.o : sistema.cc
-	g++ -c sistema.cc
+sistema.o : sistema.cc paciente.cc
+	g++ -c sistema.cc paciente.cc
 
 paciente.o: paciente.cc
 	g++ -c paciente.cc
 
 tratamiento.o: tratamiento.cc
 	g++ -c tratamiento.cc -std=gnu++11
-	
+
+cita.o: cita.cc
+	g++ -c cita.cc
+
+paciente_unittest.o: paciente_unittest.cc paciente.cc paciente.h
+
+paciente_unittest.exe: paciente_unittest.o paciente.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+
+cita_unittest.o: cita_unittest.cc cita.cc cita.h
+
+cita_unittest.exe: cita_unittest.o cita.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 .PHONY: clean
 
 clean:
-	del /Q /S *.o *.txt
+	del /Q/S *.o *.bin
