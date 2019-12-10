@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <cstdio>
 #include "paciente.h"
 
@@ -84,5 +84,29 @@ istream &operator>>(istream &stream, Paciente &p){
 	}while(valida != true);
 
 	return stream;
+
+}
+
+void Paciente::setReg(Reg r){
+
+	nombre_ = r.nombre;
+	apellidos_ = r.apellidos;
+	edad_ = r.edad;
+	telefono_ = r.telefono;
+	peso_ = r.peso;
+	altura_ = r.altura;
+
+}
+
+Reg Paciente::getReg() const {
+
+	Reg r;
+	strcpy(r.nombre, nombre_.c_str());
+	strcpy(r.apellidos, apellidos_.c_str());
+	r.edad = edad_;
+	r.telefono = telefono_;
+	r.peso = peso_;
+	r.altura = altura_;
+	return r;
 
 }

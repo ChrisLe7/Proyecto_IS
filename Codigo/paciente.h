@@ -10,9 +10,16 @@ using std::ostream;
 using std::list;
 using std::string;
 
+struct Reg{
 
+	char nombre[20];
+	char apellidos[30];
+	int edad;
+	double telefono;
+	float peso;
+	float altura;
 
-
+};
 
 class Paciente{
 
@@ -24,6 +31,7 @@ class Paciente{
 		double telefono_;
 		float peso_;
 		float altura_;
+		//Reg r_;
 
 	public:
 
@@ -37,12 +45,14 @@ class Paciente{
 		inline void setTelefono(double telefono){telefono_ = telefono;}
 		inline void setPeso(float peso){peso_ = peso;}
 		inline void setAltura(float altura){altura_ = altura;}
+		void setReg(Reg r);
 		inline string getNombre() const {return nombre_;}
 		inline string getApellidos() const {return apellidos_;}
 		inline int getEdad() const {return edad_;}
 		inline double getTelefono() const {return telefono_;}
 		inline float getPeso() const {return peso_;}
 		inline float getAltura() const {return altura_;}
+		Reg getReg() const;
 
 };
 

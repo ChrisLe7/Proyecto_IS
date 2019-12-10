@@ -60,9 +60,11 @@ void Sistema::leerPacientes(/*const Paciente p*/){
 		//Paciente aux(nombre, apellidos, edad, telefono, peso, altura);
 		cout << aux;
 	}*/
+	Reg r;
 	ifstream fichero("pacientes.bin", ios::binary);
 	//fichero.seekg(0L, ios::beg);
-	while(fichero.read((char*)&aux, sizeof(Paciente))){
+	while(fichero.read((char*)&r, sizeof(Reg))){
+		aux.setReg(r);
 		cout << aux;
 	}
 	fichero.close();
@@ -79,8 +81,9 @@ void Sistema::agregarPaciente(const Paciente &p){
 	fichero << p.getTelefono() << ",";
 	fichero << p.getPeso() << ",";
 	fichero << p.getAltura() << "\n";*/
+	Reg aux = p.getReg();
 	ofstream fichero("pacientes.bin", ios::app | ios::binary);
-	fichero.write((char*)&p, sizeof(Paciente));
+	fichero.write((char*)&aux, sizeof(Reg));
 	fichero.close();
 
 }
@@ -104,6 +107,7 @@ void Sistema::modificaDatos(Paciente &p){
 		cout<<"7. Guardar cambios"<<endl;
 		cout<<"Elige una opcion: ";
 		cin>>opc;
+		getchar();
 		switch(opc){
 			case 1:
 				cout<<"Introduce el nuevo nombre: ";
@@ -118,21 +122,25 @@ void Sistema::modificaDatos(Paciente &p){
 			case 3:
 				cout<<"Introduce la nueva edad: ";
 				cin>>n;
+				getchar();
 				p.setEdad(n);
 			break;
 			case 4:
 				cout<<"Introduce el nuevo telefono: ";
 				cin>>m;
+				getchar();
 				p.setTelefono(m);
 			break;
 			case 5:
 				cout<<"Introduce el nuevo peso: ";
 				cin>>q;
+				getchar();
 				p.setPeso(q);
 			break;
 			case 6:
 				cout<<"Introduce la nueva altura: ";
 				cin>>q;
+				getchar();
 				p.setAltura(q);
 			break;
 			case 7:
@@ -145,9 +153,57 @@ void Sistema::modificaDatos(Paciente &p){
 
 }
 
+void Sistema::modificaDatosFich(const Paciente &old_p, const Paciente &new_p){
+
+	//cout << old_p << new_p;
+	Reg r;
+	int pos;
+	fstream fichero("pacientes.bin", ios::binary | ios::in | ios::out);
+	while(fichero.read((char*)&r, sizeof(Reg))){
+		if(r.nombre == old_p.getNombre() && r.apellidos == old_p.getApellidos()){
+			pos = fichero.tellg() / sizeof(Reg);
+			fichero.seekg((pos-1) * sizeof(Reg), ios::beg);
+			r = new_p.getReg();
+			fichero.write((char*)&r, sizeof(Reg));
+		}
+	}
+	fichero.close();
+
+}
+
+void Sistema::eliminarPacienteFich(const Paciente &p){
+
+	//cout << p << "1" << endl;
+	//Paciente aux(p);
+	Reg r;
+	ifstream fichero("pacientes.bin", ios::binary);
+	ofstream temp("temporal.bin", ios::binary);
+	while(fichero.read((char*)&r, sizeof(Reg))){
+		//aux.setReg(r);
+		//cout << p;
+		if(r.nombre != p.getNombre() && r.apellidos != p.getApellidos()){
+			printf("entra\n");
+			temp.write((char*)&r, sizeof(Reg));
+		}
+	}
+	fichero.close();
+	temp.close();
+	remove("pacientes.bin");
+	rename("temporal.bin", "pacientes.bin");
+
+}
+
 void Sistema::start(){
 
 	cout<<"--------Inicializando sistema--------"<<endl;
+	Paciente aux("", "");
+	Reg r;
+	ifstream fichero("pacientes.bin", ios::binary);
+	while(fichero.read((char*)&r, sizeof(Reg))){
+		aux.setReg(r);
+		pacientes_.push_back(aux);
+	}
+	fichero.close();
 	menu();
 
 }
@@ -263,8 +319,9 @@ void Sistema::setPaciente(){
 
 }
 
-bool Sistema::buscaPaciente(const Paciente &p, int opc){	//Como varias funciones parten de buscar a un paciente para funcionar, las juntamos todas optimizando el programa
+bool Sistema::buscaPaciente(Paciente &p, int opc){	//Como varias funciones parten de buscar a un paciente para funcionar, las juntamos todas optimizando el programa
 
+	Paciente old_p("", "");
 	list <Paciente> :: iterator i;
 	for(i = pacientes_.begin(); i != pacientes_.end(); i++){
 		if((*i).getNombre() == p.getNombre() && (*i).getApellidos() == p.getApellidos()){
@@ -273,11 +330,14 @@ bool Sistema::buscaPaciente(const Paciente &p, int opc){	//Como varias funciones
 				return true;
 			}
 			else if(opc == 2){	//OPC = 2 busca el paciente y lo modifica
+				old_p = *i;
 				modificaDatos(*i);
+				modificaDatosFich(old_p, *i);
 				return true;
 			}
 			else if(opc == 3){	//OPC = 3 busca un paciente y lo elimina
 				pacientes_.erase(i);
+				eliminarPacienteFich(*i);
 				return true;
 			}
 		}
