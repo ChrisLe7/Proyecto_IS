@@ -12,6 +12,9 @@ sistema.o : sistema.cc
 paciente.o: paciente.cc
 	g++ -c paciente.cc
 
+tratamiento.o: tratamiento.cc
+	g++ -c tratamiento.cc -std=gnu++11
+	
 .PHONY: clean
 
 clean:
