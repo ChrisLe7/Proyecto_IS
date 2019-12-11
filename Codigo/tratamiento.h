@@ -26,7 +26,8 @@ class Tratamiento{
 		
 	public:
 
-		Tratamiento();
+		Tratamiento(string fechainicio = "XX", string fechafinalizacion = "XX", string receta = "XX") 
+		{fechainicio_ = fechainicio;  fechafinalizacion_ = fechafinalizacion; receta_  = receta;}
 		~Tratamiento() {}
 		inline string getFechainicio() const {return fechainicio_;}
 		inline string getFechafinacilizacion() const {return fechafinalizacion_;}

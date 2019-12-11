@@ -1,4 +1,5 @@
 //NO ESTA COMPILADO
+// NO SE HAN HECHO LAS PRUEBAS
 #ifndef HISTORIAL_H
 #define HISTORIAL_H 
 
@@ -29,6 +30,9 @@ class Historial{
 		void Historial::Aniadir (string fichero) ;
 		inline string getFecha() const {return fecha_;}
 		inline string getMotivo() const {return motivo_;}
+		inline void setFecha(string fecha) {fecha_  = fecha ;}
+		inline void setMotivo(string motivo) {motivo_ = motivo;}
+		
 		RegH getRegH () ;
 		void setRegH (RegH r) ;
 };

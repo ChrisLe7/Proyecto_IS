@@ -2,7 +2,7 @@
 #include <fstream>
 #include "gtest/gtest.h"
 #include <string>
-
+// NO COMPILAR TODAVIA 
 using namespace std;
 TEST(Cita, ConstructorParametrosDefecto) {
   Cita p("31/12/2025","12:02","Pepe Botella");

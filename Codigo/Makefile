@@ -20,7 +20,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
-all: main.exe cita_unittest.exe
+all: main.exe cita_unittest.exe tratamiento_unittest.exe historial_unittest.exe
 
 gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
@@ -63,6 +63,18 @@ cita_unittest.o: cita_unittest.cc cita.cc cita.h
 
 cita_unittest.exe: cita_unittest.o cita.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+tratamiento_unittest.o: tratamiento_unittest.cc tratamiento.cc tratamiento.h
+
+tratamiento_unittest.exe: tratamiento_unittest.o tratamiento.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+
+historial_unittest.o: historial_unittest.cc historial.cc historial.h
+
+historial_unittest.exe: historial_unittest.o historial.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+
+
+
 .PHONY: clean
 
 clean:

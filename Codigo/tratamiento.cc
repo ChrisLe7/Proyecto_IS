@@ -4,11 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include "tratamiento.h"
-
-
+#include <string>
 using namespace std;
 
-Tratamiento::Tratamiento(){}
 
 void Tratamiento::Mostrar(string fichero){
 	RegT r_aux;
