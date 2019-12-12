@@ -12,7 +12,8 @@
 #include "paciente.h"
 #include "sistema.h"
 #include "cita.h"
-
+#include "tratamiento.h"
+#include "historial.h"
 using std::fstream;
 using std::ofstream;
 using std::ifstream;
@@ -36,7 +37,12 @@ void Sistema::opciones(){
 	cout<<"9) Eliminar cita."<<endl;
 	cout<<"10) Mostrar agenda del dia."<<endl;
 	cout<<"11) Mostrar agenda completa."<<endl;
-	cout<<"12) Salir del programa."<<endl;
+	cout<<"12) Mostrar Historial Medico a un Paciente"<<endl;
+	cout<<"13) Añadir un nuevo Historial Medico a un Paciente "<<endl;
+	cout<<"14) Mostrar Tratamiento Medico de un Paciente"<<endl;
+	cout<<"15) Añadir un nuevo Tratamiento Medico a un Paciente "<<endl;
+	cout<<"16) Finalizar un Tratamiento Medico a un Paciente "<<endl;
+	cout<<"17) Salir del programa."<<endl;
 
 }
 
@@ -264,6 +270,9 @@ void Sistema::menu(){
 	int opc;
 	string nombre, apellidos;
 	Paciente aux("", "");
+//	Historial historial (""); // REVISAR
+//	Tratamiento tratamiento ("") ; // REVISAR
+	string fecha, motivo; 
 	do{
 		getchar();
 		system(CLEAN);
@@ -320,7 +329,7 @@ void Sistema::menu(){
 				cout<<"Introduce el nombre del paciente para concertar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-				concertarCita(aux);
+			//	concertarCita(aux);
 			break;
 			case 8:
 				cout<<"Introduce el nombre del paciente para modificar cita: ";
@@ -329,28 +338,79 @@ void Sistema::menu(){
 				cout<<"Introduce el nombre del paciente para modificar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-				modificarCita(aux);
+			//	modificarCita(aux);
 			break;
 			case 9:
 				cout<<"Introduce el nombre del paciente para eliminar cita: ";
 				getline(cin, nombre);
 				aux.setNombre(nombre);
-				cout<<"Introduce el nombre del paciente para eliminar cita: ";
+				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-				eliminarCita(aux);
+			//	eliminarCita(aux);
 			break;
 			case 10:
-				mostrarCitas();
+				mostrarCitas(); // HAY QUE DISTINGUIR LAS DE ESE DIA
+			break;
+			case 11:
+				mostrarCitas() ; // HAY QUE MOSTRAR TODAS LAS CITAS
 			break;
 			case 12:
+				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				getline(cin,nombre);
+				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				getline(cin, apellidos);
+			//	historial.Mostrar(nombre+"_"+apellidos + ".bin");
+
+			break;
+			case 13:
+				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				getline(cin,nombre);
+				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				getline(cin, apellidos);
+				cout<<"Introduzca la fecha de la Consulta que desee introducir en el Historial";
+				getline(cin,fecha);
+//				historial.setFecha(fecha);
+				cout<<"Introduzca los Motivos de la Consulta";
+				getline (cin, motivo); // REVISAR
+//				historial.setMotivo(motivo); 
+			//	historial.Aniadir(nombre+"_"+apellidos + ".bin");
+			break;
+			case 14:
+				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				getline(cin,nombre);
+				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				getline(cin, apellidos);
+			//	tratamiento.Mostrar(nombre+"_"+apellidos + ".bin");
+
+			break;
+
+			case 15 :
+				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				getline(cin,nombre);
+				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				getline(cin, apellidos);
+				cout<<"Introduzca la fecha de Inicio del Tratamiento que desee Introducir ";
+				getline(cin,fecha);
+//				tratamiento.setFechainicio(fecha);
+				cout<<"Introduzca la fecha de Finalizacion del Tratamiento que desee Introducir";
+//				tratamiento.setFechafinacilizacion(fecha);
+				cout<<"Introduzca la Receta del Tratamiento";
+				getline (cin, motivo); // REVISAR 
+			//	tratamiento.Aniadir(nombre+"_"+apellidos + ".bin");
+			break;
+			case 16:
+				// FINALIZAR TRATAMIENTO
+
+			break;
+			case 17:
 				cout<<"Saliendo del programa."<<endl;
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
 		}
 
-	}while(opc != 12);
+	}while(opc != 17);
 
 }
 
@@ -560,3 +620,4 @@ void Sistema::mostrarCitas(){
 	fichero.close();
 
 }
+
