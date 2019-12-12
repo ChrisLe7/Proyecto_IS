@@ -1,3 +1,9 @@
+#ifdef _WIN32
+	#define CLEAN "cls"
+#else
+	#define CLEAN "clear"
+#endif
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -7,9 +13,7 @@
 #include "sistema.h"
 #include "cita.h"
 
-using namespace std;
-
-/*using std::fstream;
+using std::fstream;
 using std::ofstream;
 using std::ifstream;
 using std::ios;
@@ -18,7 +22,7 @@ using std::cout;
 using std::endl;
 using std::list;
 using std::string;
-*/
+
 void Sistema::opciones(){
 
 	cout<<"1) Crear paciente."<<endl;
@@ -27,7 +31,12 @@ void Sistema::opciones(){
 	cout<<"4) Modificar paciente."<<endl;
 	cout<<"5) Eliminar paciente."<<endl;
 	cout<<"6) Leer pacientes."<<endl;
-	cout<<"7) Salir del programa."<<endl;
+	cout<<"7) Concertar cita."<<endl;
+	cout<<"8) Modificar cita."<<endl;
+	cout<<"9) Eliminar cita."<<endl;
+	cout<<"10) Mostrar agenda del dia."<<endl;
+	cout<<"11) Mostrar agenda completa."<<endl;
+	cout<<"12) Salir del programa."<<endl;
 
 }
 
@@ -256,6 +265,8 @@ void Sistema::menu(){
 	string nombre, apellidos;
 	Paciente aux("", "");
 	do{
+		getchar();
+		system(CLEAN);
 		opciones();
 		cout<<"Elige una opcion: ";
 		cin>>opc;
@@ -303,13 +314,43 @@ void Sistema::menu(){
 				leerPacientes();
 			break;
 			case 7:
+				cout<<"Introduce el nombre del paciente para concertar cita: ";
+				getline(cin, nombre);
+				aux.setNombre(nombre);
+				cout<<"Introduce el nombre del paciente para concertar cita: ";
+				getline(cin, apellidos);
+				aux.setApellidos(apellidos);
+				concertarCita(aux);
+			break;
+			case 8:
+				cout<<"Introduce el nombre del paciente para modificar cita: ";
+				getline(cin, nombre);
+				aux.setNombre(nombre);
+				cout<<"Introduce el nombre del paciente para modificar cita: ";
+				getline(cin, apellidos);
+				aux.setApellidos(apellidos);
+				modificarCita(aux);
+			break;
+			case 9:
+				cout<<"Introduce el nombre del paciente para eliminar cita: ";
+				getline(cin, nombre);
+				aux.setNombre(nombre);
+				cout<<"Introduce el nombre del paciente para eliminar cita: ";
+				getline(cin, apellidos);
+				aux.setApellidos(apellidos);
+				eliminarCita(aux);
+			break;
+			case 10:
+				mostrarCitas();
+			break;
+			case 12:
 				cout<<"Saliendo del programa."<<endl;
 			break;
 			default:
 				cout<<"Opcion no valida"<<endl;
 		}
 
-	}while(opc != 7);
+	}while(opc != 12);
 
 }
 
@@ -443,31 +484,32 @@ bool Sistema::eliminarPaciente(const Paciente &p){
 
 }
 
-bool Sistema::concertarCita(){
+bool Sistema::concertarCita(const Paciente &p){
 
 	Cita c;
-	cin>>c;
-	if(c.checkCita() == true){
-		insertarCita(c);
-		return true;
+	list <Paciente> :: iterator i;
+	for(i = pacientes_.begin(); i != pacientes_.end(); i++){
+		if((*i).getNombre() == p.getNombre() && (*i).getApellidos() == p.getApellidos()){
+			c.setPaciente(p.getNombre() + " " + p.getApellidos());
+			cin>>c;
+			if(c.checkCita() == true){
+				insertarCita(c);
+				return true;
+			}
+		}
 	}
-	else{
-		return false;
-	}
+	return false;
 
 }
 
-bool Sistema::modificarCita(){
+bool Sistema::modificarCita(const Paciente &p){
 
 	Cita c;
 	RegC r;
 	int pos;
-	string line;
-	cout<<"Introduce el nombre completo del paciente cuya cita quiere cambiar: ";
-	getline(cin, line);
-	fstream fichero("citas.bin", ios::binary);
+	fstream fichero("citas.bin", ios::binary | ios::in | ios::out);
 	while(fichero.read((char*)&r, sizeof(RegC))){
-		if(r.paciente == line){
+		if(r.paciente == p.getNombre() + " " + p.getApellidos()){
 			c.setRegC(r);
 			modificaDatosCita(c);
 			pos = fichero.tellg() / sizeof(RegC);
@@ -481,24 +523,40 @@ bool Sistema::modificarCita(){
 
 }
 
-bool Sistema::eliminarCita(){
+bool Sistema::eliminarCita(const Paciente &p){
 
 	RegC r;
-	string line;
-	cout<<"Introduce el nombre completo del paciente cuya cita quiere cambiar: ";
-	getline(cin, line);
+	int cont = 0;
 	ifstream fichero("citas.bin", ios::binary);
 	ofstream temp("temporal.bin", ios::binary);
 	while(fichero.read((char*)&r, sizeof(RegC))){
-		//aux.setReg(r);
-		//cout << p;
-		if(line != r.paciente){
+		if(p.getNombre() + " " + p.getApellidos() != r.paciente){
 			temp.write((char*)&r, sizeof(RegC));
+		}
+		else{
+			cont = 1;
 		}
 	}
 	fichero.close();
 	temp.close();
 	remove("citas.bin");
 	rename("temporal.bin", "citas.bin");
+	if(cont != 0){
+		return true;
+	}
+	return false;
+
+}
+
+void Sistema::mostrarCitas(){
+
+	Cita c;
+	RegC r;
+	ifstream fichero("citas.bin", ios::binary);
+	while(fichero.read((char*)&r, sizeof(RegC))){
+		c.setRegC(r);
+		cout << c;
+	}
+	fichero.close();
 
 }

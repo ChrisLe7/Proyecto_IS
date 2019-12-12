@@ -1,6 +1,3 @@
-/*
-	COMPILA SIN ERRORES PERO NO LE HE HECHOS PRUEBAS
-*/
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -8,7 +5,13 @@
 #include <cstring>
 #include "cita.h"
 
-using namespace std;
+using std::string;
+using std::istream;
+using std::ostream;
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::ios;
 
 ostream &operator<<(ostream &stream, const Cita &c){
 
@@ -22,9 +25,6 @@ ostream &operator<<(ostream &stream, const Cita &c){
 istream &operator>>(istream &stream, Cita &c){
 
 	string line;
-	cout<<"Introduce el nombre del paciente: ";
-	getline(stream, line);
-	c.setPaciente(line);
 	cout<<"Introduce la fecha: ";
 	getline(stream, line);
 	c.setFecha(line);

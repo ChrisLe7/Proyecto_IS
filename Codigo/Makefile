@@ -1,4 +1,4 @@
-GTEST_DIR = /home/christian-2019/POO/googletest/
+GTEST_DIR = C:\Users\angel\Desktop\UCO\POO\googletest
 # Where to find user code.
 # USER_DIR = ../samples
 
@@ -20,7 +20,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
-all: main.exe cita_unittest.exe tratamiento_unittest.exe historial_unittest.exe
+all: main
 
 gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
@@ -36,14 +36,14 @@ gtest.a : gtest-all.o
 gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
-main.exe: main.o sistema.o paciente.o
-	g++ -o main.exe main.o sistema.o paciente.o
+main: main.o sistema.o paciente.o cita.o
+	g++ -o main main.o sistema.o paciente.o cita.o
 
 main.o: main.cc
 	g++ -c main.cc
 
-sistema.o : sistema.cc paciente.cc
-	g++ -c sistema.cc paciente.cc
+sistema.o : sistema.cc paciente.cc cita.cc
+	g++ -c sistema.cc paciente.cc cita.cc
 
 paciente.o: paciente.cc
 	g++ -c paciente.cc
@@ -56,21 +56,21 @@ cita.o: cita.cc
 
 paciente_unittest.o: paciente_unittest.cc paciente.cc paciente.h
 
-paciente_unittest.exe: paciente_unittest.o paciente.o gtest_main.a
+paciente_unittest: paciente_unittest.o paciente.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 cita_unittest.o: cita_unittest.cc cita.cc cita.h
 
-cita_unittest.exe: cita_unittest.o cita.o gtest_main.a
+cita_unittest: cita_unittest.o cita.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 tratamiento_unittest.o: tratamiento_unittest.cc tratamiento.cc tratamiento.h
 
-tratamiento_unittest.exe: tratamiento_unittest.o tratamiento.o gtest_main.a
+tratamiento_unittest: tratamiento_unittest.o tratamiento.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 historial_unittest.o: historial_unittest.cc historial.cc historial.h
 
-historial_unittest.exe: historial_unittest.o historial.o gtest_main.a
+historial_unittest: historial_unittest.o historial.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 
