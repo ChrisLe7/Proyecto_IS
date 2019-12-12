@@ -5,21 +5,25 @@
 
 using namespace std;
 TEST(Historial, ConstructorParametrosDefecto) {
-  Historial p("31/12/2025","Motivo");
-  
-  	EXPECT_EQ("31/12/2025", p.getFecha());
-  	EXPECT_EQ("Motivo", p.getMotivo());
-
+  remove("prueba.bin");
+  ifstream fichero ("prueba.bin", ios:: in | ios ::binary) ;
+  EXPECT_FALSE (fichero.is_open());
+  Historial p("prueba.bin");
+  ifstream fichero ("prueba.bin", ios:: in | ios ::binary) ;
+  EXPECT_TRUE (fichero.is_open());
+  fichero.close();
 }
 
 TEST(Historial, getRegH){
-  Historial p("31/12/2025","29/07/20","Motivo");
+  Historial p("prueba.bin");
+	p.setFecha ("31/12/2025");
+	p.setMotivo("Motivo"); 
 	RegH r = p.getRegT();
 	string fecha, motivo ;
 	fecha = r.fecha;
 	motivo = r.motivo;
 	EXPECT_EQ("31/12/2025",fecha);
-  	EXPECT_EQ("Receta::2", motivo);
+  	EXPECT_EQ("Motivo", motivo);
 }
 
 TEST(Historial, setRegH){
@@ -29,7 +33,7 @@ TEST(Historial, setRegH){
 	strcpy(r.fecha, fecha.c_str());
 	strcpy(r.motivo, motivo.c_str());
 	
-	Historial p;
+	Historial p("prueba.bin");
 	p.setRegH(r);
 
  	EXPECT_EQ("31/12/2025", p.getFecha());

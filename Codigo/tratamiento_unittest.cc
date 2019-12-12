@@ -2,19 +2,26 @@
 #include <fstream>
 #include "gtest/gtest.h"
 #include <string>
-// NO COMPILAR TODAVIA 
+
 using namespace std;
 TEST(Tratamiento, ConstructorParametrosDefecto) {
-  Tratamiento p("31/12/2025","29/07/2020","Receta::2");
-  
-  	EXPECT_EQ("31/12/2025", p.getFechainicio());
-  	EXPECT_EQ("29/07/2020" ,p.getFechafinacilizacion());
-  	EXPECT_EQ("Receta::2", p.getReceta());
-
+  remove("prueba.bin");
+  ifstream fichero ("prueba.bin", ios:: in | ios ::binary) ;
+  EXPECT_FALSE (fichero.is_open());
+  Tratamiento p("prueba.bin");
+  ifstream fichero ("prueba.bin", ios:: in | ios ::binary) ;
+  EXPECT_TRUE (fichero.is_open());
+  fichero.close();
 }
 
 TEST(Tratamiento, getRegT){
-  Tratamiento p("31/12/2025","29/07/20","Receta::2");
+  	Tratamiento p("prueba.bin");
+	p.setFechainicio("31/12/2025");
+	p.setFechafinalizacion("29/07/2020");
+	p.setReceta("Receta::2");
+	EXPECT_EQ("31/12/2025", p.getFechainicio());
+  	EXPECT_EQ("29/07/2020" ,p.getFechafinacilizacion());
+  	EXPECT_EQ("Receta::2", p.getReceta());
 	RegT r = p.getRegT();
 	string fecha_inicio, fecha_final, receta ;
 	fecha_inicio = r.fechainicio;
@@ -27,8 +34,8 @@ TEST(Tratamiento, getRegT){
 
 TEST(Tratamiento, setRegT){
 	string fecha_inicio = "31/12/2025";
-	string fecha_final = "12:02";
-	string receta = "Pepe Botella";
+	string fecha_final = "29/07/2020";
+	string receta = "Receta::2";
 	RegT r;
 	strcpy(r.fechainicio, fecha_inicio.c_str());
 	strcpy(r.fechafinalizacion, fecha_final.c_str());
