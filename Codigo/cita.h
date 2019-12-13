@@ -29,18 +29,17 @@ class Cita{
 			fecha_ = fecha; hora_ = hora; paciente_ = paciente;
 		}
 		~Cita(){}
-		bool checkCita();
-		//void InsertarCita();
 		friend ostream &operator<<(ostream &stream, const Cita &c);
 		friend istream &operator>>(istream &stream, Cita &c);
-		string getFecha() const {return fecha_;}
-		string getHora() const {return hora_;}
-		string getPaciente() const {return paciente_;}
-		void setFecha(string fecha){fecha_ =fecha;}
-		void setHora(string hora){hora_ = hora;}
-		void setPaciente(string paciente){paciente_ = paciente;}
+		inline void setFecha(string fecha){fecha_ =fecha;}
+		inline void setHora(string hora){hora_ = hora;}
+		inline void setPaciente(string paciente){paciente_ = paciente;}
 		void setRegC(RegC r);
+		inline string getFecha() const {return fecha_;}
+		inline string getHora() const {return hora_;}
+		inline string getPaciente() const {return paciente_;}
 		RegC getRegC() const;
+		bool checkCita();
 		//bool ConcertarCita() {if (check_cita() == true) {InsertarCita();return true;} else {/*VOLVER A INTRODUCIR UNA CITA _ SE PUEDE IMPLEMENTAR AQUI O EN LA FUNCION PRINCIPAL*/ return false;}}
 		//bool ModificarCita () ;
 		//bool EliminarCita () ;

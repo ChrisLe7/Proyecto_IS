@@ -5,6 +5,8 @@
 #include <list>
 #include "paciente.h"
 #include "cita.h"
+#include "tratamiento.h"
+#include "historial.h"
 
 using std::list;
 using std::string;

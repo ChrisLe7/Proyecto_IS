@@ -14,6 +14,7 @@
 #include "cita.h"
 #include "tratamiento.h"
 #include "historial.h"
+
 using std::fstream;
 using std::ofstream;
 using std::ifstream;
@@ -37,16 +38,16 @@ void Sistema::opciones(){
 	cout<<"9) Eliminar cita."<<endl;
 	cout<<"10) Mostrar agenda del dia."<<endl;
 	cout<<"11) Mostrar agenda completa."<<endl;
-	cout<<"12) Mostrar Historial Medico a un Paciente"<<endl;
-	cout<<"13) Añadir un nuevo Historial Medico a un Paciente "<<endl;
-	cout<<"14) Mostrar Tratamiento Medico de un Paciente"<<endl;
-	cout<<"15) Añadir un nuevo Tratamiento Medico a un Paciente "<<endl;
-	cout<<"16) Finalizar un Tratamiento Medico a un Paciente "<<endl;
+	cout<<"12) Mostrar historial medico de un paciente."<<endl;
+	cout<<"13) Aniadir un nuevo historial medico de un paciente."<<endl;
+	cout<<"14) Mostrar tratamiento medico de un paciente."<<endl;
+	cout<<"15) Aniadir un nuevo tratamiento medico a un paciente."<<endl;
+	cout<<"16) Finalizar un tratamiento medico de un paciente."<<endl;
 	cout<<"17) Salir del programa."<<endl;
 
 }
 
-void Sistema::leerPacientes(/*const Paciente p*/){
+void Sistema::leerPacientes(){
 
 	Paciente aux("", "");
 	/*string nombre, apellidos;
@@ -270,9 +271,9 @@ void Sistema::menu(){
 	int opc;
 	string nombre, apellidos;
 	Paciente aux("", "");
-//	Historial historial (""); // REVISAR
-//	Tratamiento tratamiento ("") ; // REVISAR
-	string fecha, motivo; 
+	Historial historial(""); // REVISAR
+	Tratamiento tratamiento("") ; // REVISAR
+	string receta, fecha, motivo; 
 	do{
 		getchar();
 		system(CLEAN);
@@ -326,19 +327,19 @@ void Sistema::menu(){
 				cout<<"Introduce el nombre del paciente para concertar cita: ";
 				getline(cin, nombre);
 				aux.setNombre(nombre);
-				cout<<"Introduce el nombre del paciente para concertar cita: ";
+				cout<<"Introduce los apellidos del paciente para concertar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-			//	concertarCita(aux);
+				concertarCita(aux);
 			break;
 			case 8:
 				cout<<"Introduce el nombre del paciente para modificar cita: ";
 				getline(cin, nombre);
 				aux.setNombre(nombre);
-				cout<<"Introduce el nombre del paciente para modificar cita: ";
+				cout<<"Introduce los apellidos del paciente para modificar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-			//	modificarCita(aux);
+				modificarCita(aux);
 			break;
 			case 9:
 				cout<<"Introduce el nombre del paciente para eliminar cita: ";
@@ -347,7 +348,7 @@ void Sistema::menu(){
 				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
 				getline(cin, apellidos);
 				aux.setApellidos(apellidos);
-			//	eliminarCita(aux);
+				eliminarCita(aux);
 			break;
 			case 10:
 				mostrarCitas(); // HAY QUE DISTINGUIR LAS DE ESE DIA
@@ -356,52 +357,59 @@ void Sistema::menu(){
 				mostrarCitas() ; // HAY QUE MOSTRAR TODAS LAS CITAS
 			break;
 			case 12:
-				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				cout<<"Introduce el nombre del paciente que desea visualizar su historial medico: ";
 				getline(cin,nombre);
 				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
 				getline(cin, apellidos);
-			//	historial.Mostrar(nombre+"_"+apellidos + ".bin");
-
+				historial.mostrarHistorial(nombre + "_" + apellidos);
 			break;
 			case 13:
-				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				cout<<"Introduzca el nombre del paciente del que desea visualizar su historial medico: ";
 				getline(cin,nombre);
-				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				cout<<"Introduzca los apellidos del paciente del que desea visualizar su historial medico: ";
 				getline(cin, apellidos);
-				cout<<"Introduzca la fecha de la Consulta que desee introducir en el Historial";
+				cout<<"Introduzca la fecha de la consulta que desee introducir en el historial: ";
 				getline(cin,fecha);
-//				historial.setFecha(fecha);
-				cout<<"Introduzca los Motivos de la Consulta";
-				getline (cin, motivo); // REVISAR
-//				historial.setMotivo(motivo); 
-			//	historial.Aniadir(nombre+"_"+apellidos + ".bin");
+				historial.setFecha(fecha);
+				cout<<"Introduzca los motivos de la consulta: ";
+				getline(cin, motivo); // REVISAR
+				historial.setMotivo(motivo); 
+				historial.aniadirHistorial(nombre + "_" + apellidos);
 			break;
 			case 14:
-				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				cout<<"Introduzca el nombre del paciente del que desea visualizar su tratamiento medico: ";
 				getline(cin,nombre);
-				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				cout<<"Introduzca los apellidos del paciente del que desea visualizar su tratamiento medico: ";
 				getline(cin, apellidos);
-			//	tratamiento.Mostrar(nombre+"_"+apellidos + ".bin");
-
+				tratamiento.mostrarTratamiento(nombre + "_" + apellidos);
 			break;
-
 			case 15 :
-				cout<<"Introduce el nombre del paciente que desea visualizar su Historial Medico: ";
+				cout<<"Introduzca el nombre del paciente al que desea aniadir un tratamiento medico: ";
 				getline(cin,nombre);
-				cout<<"Introduce los apellidos del paciente para eliminar cita: ";
+				cout<<"Introduzca los apellidos del paciente al que desea aniadir un tratamiento medico: ";
 				getline(cin, apellidos);
-				cout<<"Introduzca la fecha de Inicio del Tratamiento que desee Introducir ";
+				cout<<"Introduzca la fecha de inicio del tratamiento que desee introducir: ";
 				getline(cin,fecha);
-//				tratamiento.setFechainicio(fecha);
-				cout<<"Introduzca la fecha de Finalizacion del Tratamiento que desee Introducir";
-//				tratamiento.setFechafinacilizacion(fecha);
-				cout<<"Introduzca la Receta del Tratamiento";
-				getline (cin, motivo); // REVISAR 
-			//	tratamiento.Aniadir(nombre+"_"+apellidos + ".bin");
+				tratamiento.setFechainicio(fecha);
+				cout<<"Introduzca la fecha de finalizacion del tratamiento que desee introducir: ";
+				getline(cin,fecha);
+				tratamiento.setFechafinacilizacion(fecha);
+				cout<<"Introduzca la receta del tratamiento: ";
+				getline(cin, receta); // REVISAR 
+				tratamiento.setReceta(receta);
+				tratamiento.aniadirTratamiento(nombre + "_" + apellidos);
 			break;
 			case 16:
 				// FINALIZAR TRATAMIENTO
-
+				cout<<"Introduzca el nombre del paciente del que desea finalizar un tratamiento medico: ";
+				getline(cin,nombre);
+				cout<<"Introduzca los apellidos del paciente del que desea finalizar un tratamiento medico: ";
+				getline(cin, apellidos);
+				cout<<"Introduzca la receta que desea finalizar: ";
+				getline(cin, receta);
+				cout<<"Introduzca la fecha de finalizacion del tratamiento: ";
+				getline(cin,fecha);
+				tratamiento.finalizarTratamiento(nombre + "_" + apellidos, receta, fecha);
 			break;
 			case 17:
 				cout<<"Saliendo del programa."<<endl;

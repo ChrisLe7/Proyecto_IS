@@ -42,29 +42,29 @@ istream &operator>>(istream &stream, Paciente &p){
 	float peso, altura;
 	char SN;	//Opcion que indica si quiere o no introducir el resto de datos
 	bool valida = false;	//Gestiona el bucle para que no salga en caso de introducir algo distinto de si o no
-	cout<<"Introduce el nombre del paciente: ";
+	cout<<"Introduzca el nombre del paciente: ";
 	getline(stream, nombre);
 	p.setNombre(nombre);
-	cout<<"Introduce los apellidos del paciente: ";
+	cout<<"Introduzca los apellidos del paciente: ";
 	getline(stream, apellidos);
 	p.setApellidos(apellidos);
 	do{
 		cout<<"¿Desea introducir la edad, el telefono, el peso y la altura del paciente? (S/N): ";
 		SN = getchar();
 		if('s' == SN || 'S' == SN){
-			cout<<"Introduce la edad del paciente: ";
+			cout<<"Introduzca la edad del paciente: ";
 			stream>>edad;
 			p.setEdad(edad);
 			getchar();
-			cout<<"Introduce el telefono del paciente: ";
+			cout<<"Introduzca el telefono del paciente: ";
 			stream>>telefono;
 			p.setTelefono(telefono);
 			getchar();
-			cout<<"Introduce el peso del paciente: ";
+			cout<<"Introduzca el peso del paciente: ";
 			stream>>peso;
 			p.setPeso(peso);
 			getchar();
-			cout<<"Introduce la altura del paciente: ";
+			cout<<"Introduzca la altura del paciente: ";
 			stream>>altura;
 			p.setAltura(altura);
 			getchar();

@@ -31,7 +31,6 @@ class Paciente{
 		double telefono_;
 		float peso_;
 		float altura_;
-		//Reg r_;
 
 	public:
 

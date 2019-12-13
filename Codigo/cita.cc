@@ -15,9 +15,9 @@ using std::ios;
 
 ostream &operator<<(ostream &stream, const Cita &c){
 
-	stream<<"Paciente: "<<c.getPaciente()<<endl;
-	stream<<"Fecha: "<<c.getFecha()<<endl;
-	stream<<"Hora: "<<c.getHora()<<endl;
+	stream << "Paciente: " << c.getPaciente() << endl;
+	stream << "Fecha: " << c.getFecha() << endl;
+	stream << "Hora: " << c.getHora() << endl;
 	return stream;
 
 }
@@ -25,10 +25,10 @@ ostream &operator<<(ostream &stream, const Cita &c){
 istream &operator>>(istream &stream, Cita &c){
 
 	string line;
-	cout<<"Introduce la fecha: ";
+	cout << "Introduzca la fecha: ";
 	getline(stream, line);
 	c.setFecha(line);
-	cout<<"Introduce la hora: ";
+	cout << "Introduzca la hora: ";
 	getline(stream, line);
 	c.setHora(line);
 	return stream;

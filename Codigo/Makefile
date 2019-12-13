@@ -36,23 +36,26 @@ gtest.a : gtest-all.o
 gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
-main: main.o sistema.o paciente.o cita.o
-	g++ -o main main.o sistema.o paciente.o cita.o
+main: main.o sistema.o paciente.o cita.o tratamiento.o historial.o
+	g++ -o main main.o sistema.o paciente.o cita.o tratamiento.o historial.o
 
 main.o: main.cc
-	g++ -c main.cc
+	g++ -c -std=gnu++11 main.cc
 
-sistema.o : sistema.cc paciente.cc cita.cc
-	g++ -c sistema.cc paciente.cc cita.cc
+sistema.o : sistema.cc
+	g++ -c -std=gnu++11 sistema.cc
 
 paciente.o: paciente.cc
-	g++ -c paciente.cc
-
-tratamiento.o: tratamiento.cc
-	g++ -c tratamiento.cc -std=gnu++11
+	g++ -c -std=gnu++11 paciente.cc
 
 cita.o: cita.cc
-	g++ -c cita.cc
+	g++ -c -std=gnu++11 cita.cc
+
+tratamiento.o: tratamiento.cc
+	g++ -c -std=gnu++11 tratamiento.cc
+
+historial.o: historial.cc
+	g++ -c -std=gnu++11 historial.cc
 
 paciente_unittest.o: paciente_unittest.cc paciente.cc paciente.h
 
