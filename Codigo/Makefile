@@ -1,4 +1,4 @@
-GTEST_DIR = C:\Users\angel\Desktop\UCO\POO\googletest
+GTEST_DIR = /home/christian-2019/POO/googletest
 # Where to find user code.
 # USER_DIR = ../samples
 

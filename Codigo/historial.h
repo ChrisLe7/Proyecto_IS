@@ -1,5 +1,3 @@
-//NO ESTA COMPILADO
-// NO SE HAN HECHO LAS PRUEBAS
 #ifndef HISTORIAL_H
 #define HISTORIAL_H 
 
@@ -44,8 +42,6 @@ class Historial{
 		inline string getFecha() const {return fecha_;}
 		inline string getMotivo() const {return motivo_;}
 		RegH getRegH() const;
-		void mostrarHistorial(string nomFich);
-		void aniadirHistorial(string nomFich);
 
 };
 
